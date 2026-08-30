@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+form {
+    display: flex;
+    gap: 5px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 8px;
+}
+
+input[type="submit"] {
+    padding: 8px 12px;
+}
