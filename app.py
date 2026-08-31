@@ -68,12 +68,14 @@ def update(id):
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     if request.method == 'POST':
-        var1 = 'Hello world'
-        return render_template('search.html', var1=var1)
+        stmt = db.select(Todo.content).where(Todo.content.contains("Python"))
+        result = db.session.execute(stmt).scalars().all()
+        return render_template('search.html', result=result)
+    
     else:
         return render_template('search.html')
         
 
-
+    
 if __name__ == "__main__": 
     app.run(debug=True)

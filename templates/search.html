@@ -12,7 +12,9 @@
         <input type="submit" value="test">
     </form>
 
-    <h1>{{ var1 }}</h1>
+    {% for todo in result %}
+    <p>{{ todo }}</p>
+    {% endfor %}
 </div>
 
 </div>
