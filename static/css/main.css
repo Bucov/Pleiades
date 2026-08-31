@@ -30,3 +30,11 @@ input[type="text"] {
 input[type="submit"] {
     padding: 8px 12px;
 }
+
+.search-link {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    text-decoration: none;
+    color: #007BFF;
+}

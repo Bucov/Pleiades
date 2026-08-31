@@ -65,5 +65,15 @@ def update(id):
     else:
         return render_template('update.html', task=task_to_update)
 
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+        var1 = 'Hello world'
+        return render_template('search.html', var1=var1)
+    else:
+        return render_template('search.html')
+        
+
+
 if __name__ == "__main__": 
     app.run(debug=True)
