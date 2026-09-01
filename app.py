@@ -6,15 +6,26 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
 
-class Todo(db.Model):
+
+
+class Manga(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.String(200), nullable=False)
-    completed = db.Column(db.Integer, default=0)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    title = db.Column(db.String(200), nullable=False)
+    native_title = db.Column(db.String(200), nullable=True)
+    type = db.Column(db.String(50), nullable=True)
+    status = db.Column(db.String(50), nullable=True)
+    year = db.Column(db.Integer, nullable=True)
+    rating = db.Column(db.Float, nullable=True)
+    description = db.Column(db.Text, nullable=True)
+    genres = db.Column(db.JSON, nullable=True)
+    tags = db.Column(db.JSON, nullable=True)
+    authors = db.Column(db.JSON, nullable=True)
+    total_chapters = db.Column(db.Float, nullable=True)
+    cover_url = db.Column(db.String(500), nullable=True)
+    avg_rating = db.Column(db.Float, nullable=True)
 
     def __repr__(self):
-        return '<Task %r>' % self.id
-
+            return '<Manga ID: %r>' % self.id
 
 # Yt comment fix
 with app.app_context():
@@ -24,57 +35,40 @@ with app.app_context():
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
-        task_content = request.form['content']
-        new_task = Todo(content=task_content)
-
+        request_content = request.form['content']
+        if request_content == 'one':
+                new_manga = Manga(title='Berserk', native_title='ベルセルク', type='Manga', status='Completed', year=1989, rating=9.5, description='A dark fantasy manga series written and illustrated by Kentaro Miura.', genres=['Action', 'Adventure', 'Dark Fantasy'], tags=['Guts', 'Griffith', 'Casca'], authors=['Kentaro Miura'], total_chapters=364, cover_url='https://example.com/berserk.jpg', avg_rating=9.5)
+                new_manga2 = Manga(title='Naruto', native_title='ナルト', type='Manga', status='Completed', year=1999, rating=8.5, description='A manga series written and illustrated by Masashi Kishimoto.', genres=['Action', 'Adventure', 'Fantasy'], tags=['Naruto Uzumaki', 'Ninja', 'Shinobi'], authors=['Masashi Kishimoto'], total_chapters=700, cover_url='https://example.com/naruto.jpg', avg_rating=8.5)
+                new_manga3 = Manga(title='Naruto 2', native_title='ナルト 2', type='Manga', status='Completed', year=2000, rating=8.0, description='A manga series written and illustrated by Masashi Kishimoto.', genres=['Action', 'Adventure', 'Fantasy'], tags=['Naruto Uzumaki', 'Ninja', 'Shinobi'], authors=['Masashi Kishimoto'], total_chapters=700, cover_url='https://example.com/naruto2.jpg', avg_rating=8.0)
+        else:
+                new_manga = Manga(title='One Piece', native_title='ワンピース', type='Manga', status='Ongoing', year=1997, rating=9.0, description='A manga series written and illustrated by Eiichiro Oda.', genres=['Action', 'Adventure', 'Fantasy'], tags=['Monkey D. Luffy', 'Pirates', 'Treasure'], authors=['Eiichiro Oda'], total_chapters=1000, cover_url='https://example.com/onepiece.jpg', avg_rating=9.0)
+                new_manga2 = Manga(title='Dragon Ball', native_title='ドラゴンボール', type='Manga', status='Completed', year=1984, rating=9.0, description='A manga series written and illustrated by Akira Toriyama.', genres=['Action', 'Adventure', 'Fantasy'], tags=['Goku', 'Saiyan', 'Dragon Balls'], authors=['Akira Toriyama'], total_chapters=519, cover_url='https://example.com/dragonball.jpg', avg_rating=9.0)
+                new_manga3 = Manga(title='Dragon Ball Z', native_title='ドラゴンボールZ', type='Manga', status='Completed', year=1989, rating=9.5, description='A manga series written and illustrated by Akira Toriyama.', genres=['Action', 'Adventure', 'Fantasy'], tags=['Goku', 'Saiyan', 'Dragon Balls'], authors=['Akira Toriyama'], total_chapters=325, cover_url='https://example.com/dragonballz.jpg', avg_rating=9.5)
         try:
-            db.session.add(new_task)
+            db.session.add_all([new_manga, new_manga2, new_manga3])
             db.session.commit()
             return redirect('/')
         except:
             return 'Error adding task'
 
     else:
-        tasks = Todo.query.order_by(Todo.date_created).all()
-        return render_template('index.html', tasks=tasks)
+        
+        return render_template('index.html',)
 
-@app.route('/delete/<int:id>')
-def delete(id):
-    task_to_delete = Todo.query.get_or_404(id)
-
-    try:
-        db.session.delete(task_to_delete)
-        db.session.commit()
-        return redirect('/')
-    except:
-        return 'Error deleting task'    
-
-@app.route('/update/<int:id>', methods=['GET', 'POST'])
-def update(id):
-    task_to_update = Todo.query.get_or_404(id)
-
-    if request.method == 'POST':
-        task_content = request.form['content']
-        task_to_update.content = task_content
-
-        try:
-            db.session.commit()
-            return redirect('/')
-        except:
-            return 'Error updating task'
-    else:
-        return render_template('update.html', task=task_to_update)
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     if request.method == 'POST':
-        stmt = db.select(Todo.content).where(Todo.content.contains("Python"))
+        request_title = request.form['query']
+        stmt = db.select(Manga.title).where(Manga.title.contains(request_title))
         result = db.session.execute(stmt).scalars().all()
         return render_template('search.html', result=result)
+
+        pass
     
     else:
         return render_template('search.html')
-        
+            
 
     
 if __name__ == "__main__": 

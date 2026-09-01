@@ -9,14 +9,15 @@
 
 <div class="search-form">
     <form action="/search" method="POST">
+        <input type="text" name="query" placeholder="Search for manga...">
         <input type="submit" value="test">
     </form>
 
-    {% for todo in result %}
-    <p>{{ todo }}</p>
+    {% for manga in result %}
+    <p>{{ manga }}</p>
     {% endfor %}
 </div>
 
-</div>
+
 
 {% endblock %}

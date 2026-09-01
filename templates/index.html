@@ -5,32 +5,19 @@
 {% endblock %}
 
 {% block body %}
-<h1>Task master</h1>
-{% if tasks|length < 1 %} <h3>No tasks, create one below</h3>
-    {% else %}
-    <table>
-        <tr>
-            <th>Task</th>
-            <th>Added</th>
-            <th>Actions</th>
-        </tr>
-        {%for task in tasks%}
-        <tr>
-            <td>{{ task.content }}</td>
-            <td>{{ task.date_created.date() }}</td>
-            <td>
-                <a href="/update/{{ task.id }}">Update</a><br>
-                <a href="/delete/{{ task.id }}">Delete</a>
-            </td>
-        </tr>
-        {%endfor%}
-    </table>
-    {%endif%}
 
-    <form action="/" method="POST">
-        <input type="text" name="content" id="content">
-        <input type="submit" value="Add task">
-    </form>
+<h1>Test Tasks</h1>
 
-    <a href="{{ url_for('search') }}" class="search-link">Search</a>
-    {% endblock %}
+<form action="/" method="POST">
+    <input type="hidden" name="content" value="one">
+    <input type="submit" value="Add Learn Python">
+</form>
+
+<form action="/" method="POST">
+    <input type="hidden" name="content" value="two">
+    <input type="submit" value="Add Learn Flask">
+</form>
+
+<a href="{{ url_for('search') }}" class="search-link">Search</a>
+
+{% endblock %}
