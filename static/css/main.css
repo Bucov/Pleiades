@@ -38,3 +38,10 @@ input[type="submit"] {
     text-decoration: none;
     color: #007BFF;
 }
+
+.manga-image {
+    position: absolute;
+    right: 30px;
+    top: 100px;
+    width: 250px;
+}

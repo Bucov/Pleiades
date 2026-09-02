@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Manga Recommender</title>
+{% endblock %}
+
+{% block body %}
+<h1 style="text-align: center;">Manga Details</h1>
+
+<h2>TESTING FOR NOW</h2>
+
+<img class="manga-image" src="{{ manga.cover_url }}">
+
+<p>Manga ID: {{ id }}</p>
+<p>Title: {{ manga.title }}</p>
+<p>Native Title: {{ manga.native_title }}</p>
+<p>Type: {{ manga.type }}</p>
+<p>Status: {{ manga.status }}</p>
+<p>Year: {{ manga.year }}</p>
+<p>Rating: {{ manga.rating }}</p>
+<p>Description: {{ manga.description }}</p>
+<p>Genre: {{ manga.genres|join(', ') }}</p>
+<p>Tags: {{ manga.tags|join(', ') }}</p>
+<p>Authors: {{ manga.authors|join(', ') }}</p>
+<p>Chapters: {{ manga.total_chapters }}</p>
+<p>Average Score: {{ manga.avg_rating }}</p>
+
+
+
+{% endblock %}
