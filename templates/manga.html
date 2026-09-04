@@ -1,30 +1,39 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Manga Recommender</title>
+<title>{{ manga.title }} - Pleiades</title>
 {% endblock %}
 
 {% block body %}
-<h1 style="text-align: center;">Manga Details</h1>
+<div class="manga">
+    <div>
+        <h1 class="typed">{{ manga.title }}</h1>
+        <p class="native">{{ manga.native_title }}</p>
 
-<h2>TESTING FOR NOW</h2>
+        <dl>
+            <dt>type</dt>
+            <dd>{{ manga.type }}</dd>
+            <dt>status</dt>
+            <dd>{{ manga.status }}</dd>
+            <dt>year</dt>
+            <dd>{{ manga.year }}</dd>
+            <dt>chapters</dt>
+            <dd>{{ manga.total_chapters }}</dd>
+            <dt>rating</dt>
+            <dd>{{ manga.rating }}</dd>
+            <dt>avg score</dt>
+            <dd>{{ manga.avg_rating }}</dd>
+            <dt>authors</dt>
+            <dd>{{ manga.authors|join(', ') }}</dd>
+            <dt>genres</dt>
+            <dd>{{ manga.genres|join(', ') }}</dd>
+            <dt>tags</dt>
+            <dd>{{ manga.tags|join(', ') }}</dd>
+        </dl>
 
-<img class="manga-image" src="{{ manga.cover_url }}">
+        <p class="description">{{ manga.description }}</p>
+    </div>
 
-<p>Manga ID: {{ id }}</p>
-<p>Title: {{ manga.title }}</p>
-<p>Native Title: {{ manga.native_title }}</p>
-<p>Type: {{ manga.type }}</p>
-<p>Status: {{ manga.status }}</p>
-<p>Year: {{ manga.year }}</p>
-<p>Rating: {{ manga.rating }}</p>
-<p>Description: {{ manga.description }}</p>
-<p>Genre: {{ manga.genres|join(', ') }}</p>
-<p>Tags: {{ manga.tags|join(', ') }}</p>
-<p>Authors: {{ manga.authors|join(', ') }}</p>
-<p>Chapters: {{ manga.total_chapters }}</p>
-<p>Average Score: {{ manga.avg_rating }}</p>
-
-
-
+    <img class="manga-image" src="{{ manga.cover_url }}" alt="">
+</div>
 {% endblock %}

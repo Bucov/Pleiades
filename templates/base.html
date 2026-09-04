@@ -8,8 +8,18 @@
     {% block head %}{% endblock %}
 </head>
 
-<body>
-    {% block body %}{% endblock %}
+<body class="{% block bodyclass %}{% endblock %}">
+    <div class="page">
+        <nav>
+            <a href="{{ url_for('index') }}">home</a>
+            <a href="{{ url_for('search') }}">search</a>
+            <a href="{{ url_for('about') }}">about</a>
+            <a class="right" href="{{ url_for('settings') }}">settings</a>
+        </nav>
+        {% block body %}{% endblock %}
+    </div>
+    <script src="{{ url_for('static', filename='js/pixel-data.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/frontpage-art.js') }}"></script>
 </body>
 
 </html>

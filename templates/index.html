@@ -1,23 +1,29 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Manga Recommender</title>
+<title>Pleiades</title>
 {% endblock %}
+
+{% block bodyclass %}intro{% endblock %}
 
 {% block body %}
 
-<h1>Test Tasks</h1>
+<div id="canvas-container">
+    <canvas id="mikuCanvas"></canvas>
+</div>
 
-<form action="/" method="POST">
-    <input type="hidden" name="content" value="one">
-    <input type="submit" value="Add first batch of mangas">
-</form>
+<h1 class="typed">Pleiades</h1>
 
-<form action="/" method="POST">
-    <input type="hidden" name="content" value="two">
-    <input type="submit" value="Add second batch of mangas">
-</form>
+<div class="actions">
+    <form action="/" method="POST">
+        <input type="hidden" name="content" value="one">
+        <input type="submit" value="add first batch">
+    </form>
 
-<a href="{{ url_for('search') }}" class="search-link">Search</a>
+    <form action="/" method="POST">
+        <input type="hidden" name="content" value="two">
+        <input type="submit" value="add second batch">
+    </form>
+</div>
 
 {% endblock %}

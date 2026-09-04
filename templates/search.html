@@ -1,23 +1,27 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Manga Recommender</title>
+<title>Search - Pleiades</title>
 {% endblock %}
 
 {% block body %}
-<h1 style="text-align: center;">Search</h1>
+<h1 class="typed">search</h1>
 
-<div class="search-form">
-    <form action="/search" method="POST">
-        <input type="text" name="query" placeholder="Search for manga...">
-        <input type="submit" value="test">
-    </form>
+<form action="/search" method="POST">
+    <input type="text" name="query" placeholder="title" autofocus>
+    <input type="submit" value="go">
+</form>
 
+{% if result is defined %}
+{% if result %}
+<ul class="results">
     {% for manga in result %}
-    <a href="{{ url_for('manga', id=manga.id) }}">{{ manga.title }}</a>
+    <li><a href="{{ url_for('manga', id=manga.id) }}">{{ manga.title }}</a></li>
     {% endfor %}
-</div>
-
-
+</ul>
+{% else %}
+<p class="empty">nothing found</p>
+{% endif %}
+{% endif %}
 
 {% endblock %}

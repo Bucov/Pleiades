@@ -78,6 +78,16 @@ def manga(id):
 
     return render_template('manga.html', manga=manga, id=id)
 
+
+@app.route('/settings')
+def settings():
+    return render_template('settings.html')
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
     
     
 if __name__ == "__main__": 

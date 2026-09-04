@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Settings - Pleiades</title>
+{% endblock %}
+
+{% block body %}
+<h1 class="typed">settings</h1>
+
+<div class="settings">
+    <section>
+        <p>add custom text animation</p>
+        <form id="textForm">
+            <input id="textInput" type="text" placeholder="blank = random glyphs" maxlength="64">
+            <input type="submit" value="save">
+        </form>
+        <p id="textNote" class="note"></p>
+    </section>
+</div>
+
+<pre class="art">
+ ⠀⠀⠀⢀⣾⣧⠀⠀⠀⢠⣾⣆⠀⠀⠀
+⠀⠀⠀⣼⣿⣿⣇⠀⠀⣾⣿⣿⡄⠀⠀
+⠀⠀⢠⣿⣿⣿⣿⣤⣴⣿⣿⣿⡇⠀⠀
+⠀⠀⢸⣿⡿⠛⠻⣿⣿⡿⡻⣿⡟⠀⠀
+⠀⠀⢸⣿⣇⡄⢷⣿⣿⡸⠇⣸⣷⠀⠀
+⠐⣒⣞⢿⣿⣿⣿⣿⣿⣿⣿⣿⠯⠭⣁
+⠀⠐⠚⠉⠉⣿⣿⣿⣿⣿⠋⠉⠉⠒⠀
+⠀⠀⠀⠀⣸⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀
+⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀
+⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀
+</pre>
+
+<script>
+    const textInput = document.getElementById('textInput');
+    const textNote = document.getElementById('textNote');
+    function textLabel() {
+        const t = localStorage.getItem('mikuText');
+        textNote.textContent = t === null ? 'current: Pleiades (default)' : t ? 'current: ' + t : 'current: random glyphs';
+    }
+    textInput.value = localStorage.getItem('mikuText') ?? 'Pleiades';
+    document.getElementById('textForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const t = textInput.value.trim();
+        localStorage.setItem('mikuText', t);
+        textLabel();
+    });
+    textLabel();
+</script>
+{% endblock %}
