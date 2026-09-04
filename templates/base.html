@@ -18,6 +18,7 @@
         </nav>
         {% block body %}{% endblock %}
     </div>
+    {% block outside %}{% endblock %}
     <script src="{{ url_for('static', filename='js/pixel-data.js') }}"></script>
     <script src="{{ url_for('static', filename='js/frontpage-art.js') }}"></script>
 </body>

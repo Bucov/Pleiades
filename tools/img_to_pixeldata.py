@@ -45,7 +45,8 @@ def main():
     out_path = Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with out_path.open("w", encoding="utf-8") as f:
-        f.write("const pixelData = ")
+        f.write("\n")
+        f.write("pixelData2 = ")
         json.dump(rows, f)
         f.write(";\n")
 

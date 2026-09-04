@@ -78,11 +78,11 @@ h1::before {
 /* home */
 
 /* intro: everything but the canvas waits until the art has appeared */
-.page > * {
+.page>* {
     transition: opacity 0.6s ease-out;
 }
 
-body.intro .page > :not(#canvas-container) {
+body.intro .page> :not(#canvas-container) {
     opacity: 0;
 }
 
@@ -254,7 +254,10 @@ pre.art {
     font-size: 12px;
     line-height: 1.15;
     user-select: none;
+    font-size: 8px;
 }
+
+.art {}
 
 /* about */
 
@@ -268,4 +271,38 @@ pre.art {
 .about .label {
     color: var(--dim);
     margin-bottom: 6px;
+}
+
+/* bottom-left peeking art: only the top shows until hovered */
+
+.peek {
+    position: fixed;
+    left: 16px;
+    bottom: 0;
+    color: var(--dim);
+    text-decoration: none;
+    transform: translateY(75%);
+    transition: transform 0.35s ease, color 0.35s ease, opacity 0.6s ease-out;
+}
+
+body.intro .peek {
+    opacity: 0;
+}
+
+.peek:hover {
+    color: var(--miku);
+    text-decoration: none;
+    transform: translateY(0);
+}
+
+.peek pre {
+    font-size: 10px;
+    line-height: 1;
+    user-select: none;
+}
+
+@media (max-width: 600px) {
+    .peek {
+        display: none;
+    }
 }
